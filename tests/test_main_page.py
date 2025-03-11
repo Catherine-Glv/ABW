@@ -32,5 +32,7 @@ class TestCountHotOffers:
         with (allure.step('Проверка кол-ва карточек в блоке, условие 1: нет больших карточек')):
             assert cards_page.check_condition_1(), "Условие 1 не выполнено"
 
+    @allure.story('Пересчет карточек')
+    def test_condition_2(self, cards_page):
         with (allure.step('Проверка кол-ва карточек в блоке, условие 2: 1 большая карточка, 10 маленьких')):
-            assert cards_page.check_condition_1(), "Условие 1 не выполнено"
+            assert cards_page.check_condition_2(), "Условие 2 не выполнено"
