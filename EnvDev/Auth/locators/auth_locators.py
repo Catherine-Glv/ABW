@@ -1,0 +1,13 @@
+class AuthLocators:
+    LOGIN_BUTTON = "//button[contains(text(),'Войти')]"
+    AUTH_POPUP_WINDOW = "//div[@class='modal-content modal-content--open']"
+    AGREE_CHECKBOX = "//input[@type='checkbox']"
+    TEL_INPUT = "//input[@placeholder='Введите номер телефона']"
+    NEXT_BUTTON = "//button[contains(text(),'Далее')]"
+    CAPTCHA_IFRAME = "//iframe[@title='reCAPTCHA']"
+    SMS_CODE_INPUT_1 = "(//input[@type='text'])[2]"
+    SMS_CODE_INPUT_2 = "(//input[@type='text'])[3]"
+    SMS_CODE_INPUT_3 = "(//input[@type='text'])[4]"
+    SMS_CODE_INPUT_4 = "(//input[@type='text'])[5]"
+    SMS_NEXT_BUTTON = "//button[contains(text(),'Отправить')]"
+    RESEND_CODE = "//button[contains(text(),'Выслать код повторно')]"

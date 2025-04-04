@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from pages.main_page import MainPage, CardsPage
+from MainPage.pages.main_page import MainPage, CardsPage
 
 
 @pytest.fixture(scope="session")

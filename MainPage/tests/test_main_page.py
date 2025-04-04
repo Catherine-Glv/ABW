@@ -1,7 +1,6 @@
-import time
 import allure
 
-from locators.main_page_locators import MainPageLocators
+from MainPage.locators.main_page_locators import MainPageLocators
 
 @allure.feature('Проверка отображения блока "Горячие предложения"')
 class TestHotOffers:

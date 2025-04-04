@@ -1,10 +1,9 @@
-from locators.main_page_locators import MainPageLocators
-from pages.base_page import BasePage
-from playwright.sync_api import Page
+from MainPage.locators.main_page_locators import MainPageLocators
+from MainPage.pages.base_page import BasePage
 
 
 class MainPage(BasePage):
-    URL = "https://abw.by/"
+    URL = "https://test.abw.by/"
 
     def open_page(self, url=URL) -> None:
         self.open_url(url=url)
