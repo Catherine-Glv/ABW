@@ -1,7 +1,6 @@
 from EnvDev.Auth.locators.auth_locators import AuthLocators
 from EnvDev.Auth.pages.base_page import BasePage
 
-
 class AuthPage(BasePage):
     URL = "https://test.abw.by/"
 
