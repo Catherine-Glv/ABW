@@ -1,4 +1,5 @@
 from EnvDev.Auth.locators.auth_locators import AuthLocators
+from EnvDev.Auth.locators.auth_locators import AuthLocatorsTel
 from EnvDev.Auth.pages.base_page import BasePage
 from playwright.sync_api import Page, expect
 
@@ -22,7 +23,7 @@ class AuthPage(BasePage):
             self.click_next_button()
             # Проверка с явным ожиданием (до 10 секунд)
             try:
-                if self.page.locator(AuthLocators.CAPTCHA_IFRAME).is_visible(timeout=10000):
+                if self.page.locator(AuthLocatorsTel.CAPTCHA_IFRAME).is_visible(timeout=10000):
                     self.click_captcha()
             except:
                 pass  # Капча не появилась за отведенное время
@@ -33,32 +34,35 @@ class AuthPage(BasePage):
         self.click(locator=AuthLocators.LOGIN_BUTTON)
 
     def fill_tel_input(self) -> None:
-        self.fill_value(locator=AuthLocators.TEL_INPUT, value='000000000')
+        self.fill_value(locator=AuthLocatorsTel.TEL_INPUT, value='000000000')
 
     def click_agree_checkbox(self):
-        self.click_checkbox(locator=AuthLocators.AGREE_CHECKBOX)
+        self.click_checkbox(locator=AuthLocatorsTel.AGREE_CHECKBOX)
 
     def button_is_enabled(self):
-        self.is_button_clickable(locator=AuthLocators.NEXT_BUTTON)
+        self.is_button_clickable(locator=AuthLocatorsTel.NEXT_BUTTON)
 
     def click_next_button(self):
-        self.click(locator=AuthLocators.NEXT_BUTTON)
+        self.click(locator=AuthLocatorsTel.NEXT_BUTTON)
 
     def click_captcha(self):
-        self.click(locator=AuthLocators.CAPTCHA_IFRAME)
+        self.click(locator=AuthLocatorsTel.CAPTCHA_IFRAME)
 
-    def checking_captcha(self):
+    def checking_captcha_and_click(self) -> bool:
+        # Проверка с явным ожиданием (до 10 секунд)
         try:
-            if self.page.locator(AuthLocators.CAPTCHA_IFRAME).is_visible(timeout=10000):
+            if self.page.locator(AuthLocatorsTel.CAPTCHA_IFRAME).is_visible(timeout=10000):
                 self.click_captcha()
-        except:
-            pass  # Капча не появилась за отведенное время
+                return True # Капча была и обработана
+            return False # Капчи не было
+        except Exception:
+            return False  # Ошибка при проверке (капчи нет)
 
     def fill_code(self):
-        self.fill_value(locator=AuthLocators.SMS_CODE_INPUT_1, value='9')
-        self.fill_value(locator=AuthLocators.SMS_CODE_INPUT_2, value='6')
-        self.fill_value(locator=AuthLocators.SMS_CODE_INPUT_3, value='9')
-        self.fill_value(locator=AuthLocators.SMS_CODE_INPUT_4, value='5')
+        self.fill_value(locator=AuthLocatorsTel.SMS_CODE_INPUT_1, value='9')
+        self.fill_value(locator=AuthLocatorsTel.SMS_CODE_INPUT_2, value='6')
+        self.fill_value(locator=AuthLocatorsTel.SMS_CODE_INPUT_3, value='9')
+        self.fill_value(locator=AuthLocatorsTel.SMS_CODE_INPUT_4, value='5')
 
     # def click_sms_login(self):
     #     self.click(locator=AuthLocators.SMS_NEXT_BUTTON)
@@ -72,7 +76,7 @@ class AuthPage(BasePage):
 
     def tel_input_is_visible(self) -> bool:
         try:
-            self.element_is_visible(locator=AuthLocators.TEL_INPUT)
+            self.element_is_visible(locator=AuthLocatorsTel.TEL_INPUT)
             return True
         except Exception:
             return False

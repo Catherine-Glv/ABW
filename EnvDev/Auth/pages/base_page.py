@@ -1,7 +1,5 @@
 from playwright.sync_api import Page, expect, TimeoutError
 
-from EnvDev.Auth.locators.auth_locators import AuthLocators
-
 
 class BasePage:
     def __init__(self, page: Page):
@@ -16,6 +14,9 @@ class BasePage:
 
     def click_checkbox(self, locator: str) -> None:
         self.page.locator(selector=locator).set_checked(True)
+
+    def is_checkbox_checked(self, locator: str) -> bool:
+        return self.page.locator(selector=locator).is_checked()
 
     def fill_value(self, locator: str, value: str) -> None:
         self.page.wait_for_selector(selector=locator)
@@ -33,11 +34,11 @@ class BasePage:
     def is_button_clickable(self, locator: str, timeout: float = 1.0) -> bool:
         try:
             # Проверяем, что элемент видим, enabled и не имеет атрибута 'disabled'
-            expect(self.page.is_visible(selector=locator, timeout=timeout * 1000))
-            expect(self.page.is_enabled(selector=locator, timeout=timeout * 1000))
+            expect(self.page.locator(locator)).to_be_visible(timeout=timeout * 1000)
+            expect(self.page.locator(locator)).to_be_enabled(timeout=timeout * 1000)
             return True
         except (TimeoutError, AssertionError):
             return False
 
     def element_is_visible(self, locator: str) -> bool:
-        return self.page.is_visible(selector=locator, timeout=1000)
+        return self.page.is_visible(selector=locator, timeout=3000)
