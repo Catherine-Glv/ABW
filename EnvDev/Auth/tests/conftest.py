@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from EnvDev.Auth.pages.auth_page import AuthPage
+from EnvDev.Auth.pages.auth_page_tel import AuthPage
 
 
 @pytest.fixture(scope="session")
