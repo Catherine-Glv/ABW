@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from FinancePage.pages.main_page import MainPage
+from FinancePage.pages.main_page import MainPage, FinancePage
 
 
 @pytest.fixture(scope="session")
@@ -20,3 +20,8 @@ def page(browser):
 def main_page(page):
     MainPage(page).open_page()
     return MainPage(page)
+
+@pytest.fixture(scope="function")
+def finance_page(page):
+    FinancePage(page).open_page()
+    return FinancePage(page)

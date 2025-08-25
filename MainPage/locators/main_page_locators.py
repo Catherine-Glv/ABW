@@ -1,4 +1,7 @@
 class MainPageLocators:
+    # Попап акции
+    CLOSE_POPUP = "//div[@class='promo-popup__close']"
+
     # Горячие предложения
     TITLE_HOT_OFFERS = "//h2[contains(text(),'Горячие предложения')]"
     BUTTON_HOT_OFFERS = "//button[contains(text(),'Хочу сюда')]"
