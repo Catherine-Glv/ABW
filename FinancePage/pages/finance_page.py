@@ -19,7 +19,7 @@ class MainPage(BasePage):
         """
         return self.page.locator(FinancePageLocators.HEADER_BUTTON).get_attribute("href")
 
-    def wait_for_url(self, url: str, timeout: int = 10000) -> None:
+    def wait_for_url(self, url: str, timeout: int = 5000) -> None:
         """
         Ожидает перехода на указанный URL
 
@@ -28,16 +28,6 @@ class MainPage(BasePage):
             timeout: таймаут в миллисекундах
         """
         self.page.wait_for_url(url, timeout=timeout)
-    #
-    # def verify_header_button_redirects_correctly(self) -> None:
-    #     """
-    #     Проверяет, что кнопка в шапке ведет на корректный URL
-    #     """
-    #     expected_url = self.get_header_button_url()
-    #     self.open_page_finance()
-    #     current_url = self.get_current_url()
-    #     assert current_url == expected_url, \
-    #         f"Ожидался URL: {expected_url}, получен: {current_url}"
 
 
 class FinancePage(BasePage):
@@ -57,14 +47,14 @@ class FinancePage(BasePage):
         select_locator = self.page.locator(selector)
         expect(select_locator).to_have_attribute("placeholder", expected_placeholder)
 
-    def get_select_placeholder(self, selector: str) -> str:
-        """
-        Получает текст плейсхолдера селекта
-
-        Args:
-            selector: CSS селектор элемента
-
-        Returns:
-            str: текст плейсхолдера
-        """
-        return self.page.locator(selector).get_attribute("placeholder")
+    # def get_select_placeholder(self, selector: str) -> str:
+    #     """
+    #     Получает текст плейсхолдера селекта
+    #
+    #     Args:
+    #         selector: CSS селектор элемента
+    #
+    #     Returns:
+    #         str: текст плейсхолдера
+    #     """
+    #     return self.page.locator(selector).get_attribute("placeholder")

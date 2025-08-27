@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from FinancePage.pages.main_page import MainPage, FinancePage
+from FinancePage.pages.finance_page import MainPage, FinancePage
 
 
 @pytest.fixture(scope="session")

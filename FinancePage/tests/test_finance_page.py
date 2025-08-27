@@ -8,42 +8,18 @@ class TestGoToFinance:
     @allure.story("Переход на страницу Финансы")
     def test_go_to_finance(self, main_page):
         main_page.click(locator=MainPageLocators.CLOSE_POPUP)
-        # """
-        # Тест: Проверка что кнопка в шапке ведет на корректный URL
-        # """
-        # expected_url = "https://abw.by/finance"
-        #
-        # # Кликаем по кнопке
-        # main_page.open_page_finance()
-        #
-        # # Ждем изменения URL
-        # main_page.wait_for_url(expected_url)
-        #
-        # # Проверяем что произошел переход на ожидаемый URL
-        # current_url = main_page.get_current_url()
-        # assert current_url == expected_url, \
-        #     f"Ожидался URL: {expected_url}, получен: {current_url}"
         """
-                Тест с несколькими проверками навигации
-                """
-        # Проверяем что начинаем с главной страницы
-        assert main_page.get_current_url() == main_page.URL
+        Тест: Проверка что кнопка в шапке ведет на корректный URL
+        """
+        expected_url = "https://abw.by/finance"
 
-        # Получаем целевой URL
-        target_url = main_page.get_header_button_url()
-
-        # Выполняем навигацию
         main_page.open_page_finance()
 
-        # # Ждем перехода
-        # main_page.wait_for_url(target_url)
+        main_page.wait_for_url(expected_url)
 
-        # Проверяем результат
-        final_url = main_page.get_current_url()
-
-        # Основная проверка
-        assert final_url == target_url, \
-            f"Финальный URL {final_url} не совпадает с целевым {target_url}"
+        current_url = main_page.get_current_url()
+        assert current_url == expected_url, \
+            f"Ожидался URL: {expected_url}, получен: {current_url}"
 
 
 class TestVisibleElements:
@@ -67,3 +43,11 @@ class TestVisibleElements:
         assert finance_page.element_is_visible(locator=FinancePageLocators.CARD_CONTENT)
         assert finance_page.element_is_visible(locator=FinancePageLocators.CARD_INFO)
         assert finance_page.element_is_visible(locator=FinancePageLocators.BUTTON_APPLICATION_ONE)
+
+    def test_select_placeholder(self, finance_page):
+        """Тест проверки плейсхолдера в селекте"""
+
+        finance_page.verify_select_placeholder(
+            selector="#city-select",
+            expected_placeholder="Выберите город"
+        )
