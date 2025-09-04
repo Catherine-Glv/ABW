@@ -11,4 +11,4 @@ class FinancePageLocators:
     CARD_CONTENT = "//article[@class='_card_16tsy_1']"
     BUTTON_APPLICATION_ONE = "(//button[@type='button'])[2]"
     CARD_INFO = "//div[@class='_cardInfo_16tsy_53']"
-
+    BANNER = "(//div[@id='sidebar_desktop'])[1]"

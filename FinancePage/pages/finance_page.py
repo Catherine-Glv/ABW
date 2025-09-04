@@ -20,13 +20,6 @@ class MainPage(BasePage):
         return self.page.locator(FinancePageLocators.HEADER_BUTTON).get_attribute("href")
 
     def wait_for_url(self, url: str, timeout: int = 5000) -> None:
-        """
-        Ожидает перехода на указанный URL
-
-        Args:
-            url: ожидаемый URL
-            timeout: таймаут в миллисекундах
-        """
         self.page.wait_for_url(url, timeout=timeout)
 
 
@@ -36,8 +29,8 @@ class FinancePage(BasePage):
     def open_page(self, url=URL) -> None:
         self.open_url(url=url)
 
-    def has_placeholder(self, locator: str, expected: str) -> bool:
-        """Проверка текста плейсхолдера"""
-        return self.page.inner_text() == expected
+    # def has_placeholder(self, locator: str, expected: str) -> bool:
+    #     """Проверка текста плейсхолдера"""
+    #     return self.page.inner_text() == expected
 
 
