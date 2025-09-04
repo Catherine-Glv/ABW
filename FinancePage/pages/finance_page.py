@@ -1,4 +1,4 @@
-from playwright.sync_api import expect
+from playwright.sync_api import Page, expect
 from FinancePage.locators.page_locators import FinancePageLocators
 from FinancePage.pages.base_page import BasePage
 
@@ -36,25 +36,8 @@ class FinancePage(BasePage):
     def open_page(self, url=URL) -> None:
         self.open_url(url=url)
 
-    def verify_select_placeholder(self, selector: str, expected_placeholder: str):
-        """
-        Проверяет плейсхолдер с использованием Playwright expect
+    def has_placeholder(self, locator: str, expected: str) -> bool:
+        """Проверка текста плейсхолдера"""
+        return self.page.inner_text() == expected
 
-        Args:
-            selector: CSS селектор элемента
-            expected_placeholder: ожидаемый текст плейсхолдера
-        """
-        select_locator = self.page.locator(selector)
-        expect(select_locator).to_have_attribute("placeholder", expected_placeholder)
 
-    # def get_select_placeholder(self, selector: str) -> str:
-    #     """
-    #     Получает текст плейсхолдера селекта
-    #
-    #     Args:
-    #         selector: CSS селектор элемента
-    #
-    #     Returns:
-    #         str: текст плейсхолдера
-    #     """
-    #     return self.page.locator(selector).get_attribute("placeholder")

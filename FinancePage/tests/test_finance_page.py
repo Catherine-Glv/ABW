@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from FinancePage.locators.page_locators import FinancePageLocators
 from MainPage.locators.main_page_locators import MainPageLocators
@@ -7,10 +8,6 @@ from MainPage.locators.main_page_locators import MainPageLocators
 class TestGoToFinance:
     @allure.story("Переход на страницу Финансы")
     def test_go_to_finance(self, main_page):
-        main_page.click(locator=MainPageLocators.CLOSE_POPUP)
-        """
-        Тест: Проверка что кнопка в шапке ведет на корректный URL
-        """
         expected_url = "https://abw.by/finance"
 
         main_page.open_page_finance()
@@ -44,10 +41,27 @@ class TestVisibleElements:
         assert finance_page.element_is_visible(locator=FinancePageLocators.CARD_INFO)
         assert finance_page.element_is_visible(locator=FinancePageLocators.BUTTON_APPLICATION_ONE)
 
-    def test_select_placeholder(self, finance_page):
-        """Тест проверки плейсхолдера в селекте"""
+    @allure.story("Отображение плейсхолдеров в селектах фильтра")
+    @pytest.mark.parametrize("expected_text", ["Марка"])
+    def test_select_mark(self, finance_page, expected_text):
+        with (allure.step("Проверка плейсхолдера селекта 'Марка'")):
+            assert finance_page.element_is_visible(locator=FinancePageLocators.BUTTON_MARK), (
+                f"Селект 'Марка' должен быть видимым")
+            assert finance_page.get_element_text(locator=FinancePageLocators.BUTTON_MARK) == expected_text, (
+                f"Текст плейсхолдера не совпадает")
 
-        finance_page.verify_select_placeholder(
-            selector="#city-select",
-            expected_placeholder="Выберите город"
-        )
+    @pytest.mark.parametrize("expected_text", ["Модель"])
+    def test_select_mark(self, finance_page, expected_text):
+        with (allure.step("Проверка плейсхолдера селекта 'Модель'")):
+            assert finance_page.element_is_visible(locator=FinancePageLocators.BUTTON_MODEL), (
+                f"Селект 'Модель' должен быть видимым")
+            assert finance_page.get_element_text(locator=FinancePageLocators.BUTTON_MODEL) == expected_text, (
+                f"Текст плейсхолдера не совпадает")
+
+    @pytest.mark.parametrize("expected_text", ["Год"])
+    def test_select_mark(self, finance_page, expected_text):
+        with (allure.step("Проверка плейсхолдера селекта 'Год'")):
+            assert finance_page.element_is_visible(locator=FinancePageLocators.BUTTON_YEAR), (
+                f"Селект 'Год' должен быть видимым")
+            assert finance_page.get_element_text(locator=FinancePageLocators.BUTTON_YEAR) == expected_text, (
+                f"Текст плейсхолдера не совпадает")
