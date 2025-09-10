@@ -12,3 +12,5 @@ class FinancePageLocators:
     BUTTON_APPLICATION_ONE = "(//button[@type='button'])[2]"
     CARD_INFO = "//div[@class='_cardInfo_16tsy_53']"
     BANNER = "(//div[@id='sidebar_desktop'])[1]"
+    FIRST_PAYMENT_LABEL = "div[class*='formOptionsLabel']"
+    FIRST_PAYMENT_CONTAINER = "(//div[@class='_inputContainer_1sotp_1 _formOptionsRange_1mktb_92'])[1]"

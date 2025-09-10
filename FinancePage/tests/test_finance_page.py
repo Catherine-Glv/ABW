@@ -75,3 +75,27 @@ class TestFilters:
     def test_choice_select(self, finance_page):
         ...
 
+    #TODO переписать данный тест (в gpt)
+    @allure.story("Сравнение параметров ползунков")
+    @pytest.mark.parametrize("default_value, expected_percent", [(10, 25)])
+    def test_default_first_payment(self, finance_page, default_value, expected_percent):
+        """Тест: Проверка дефолтного значения ползунка и процента."""
+
+        # Проверка дефолтного значения (10%)
+        # assert finance_page.get_slider_value() == default_value
+        assert finance_page.get_label_value() == default_value
+
+        # Проверка процента закрашивания контейнера
+        assert finance_page.get_container_percent() == expected_percent
+
+    def test_slider_is_movable(self, finance_page):
+        """Тест: Проверка, что ползунок можно двигать."""
+        old_value = finance_page.get_slider_value()
+
+        # Двигаем ползунок на +5
+        new_value = old_value + 5
+        finance_page.move_slider(new_value)
+
+        # Проверяем, что значение изменилось
+        # assert finance_page.get_slider_value() == new_value
+        assert finance_page.get_label_value() == new_value

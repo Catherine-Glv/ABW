@@ -29,8 +29,23 @@ class FinancePage(BasePage):
     def open_page(self, url=URL) -> None:
         self.open_url(url=url)
 
-    # def has_placeholder(self, locator: str, expected: str) -> bool:
-    #     """Проверка текста плейсхолдера"""
-    #     return self.page.inner_text() == expected
+    # def get_slider_value(self) -> int:
+        # """Возвращает текущее значение ползунка (например 10)."""
+        # return int(self.page.locator(FinancePageLocators.FIRST_PAYMENT_SLIDER).input_value())
 
+    def get_label_value(self) -> int:
+        """Возвращает значение процента над ползунком (например 10)."""
+        return int(self.page.locator(FinancePageLocators.FIRST_PAYMENT_LABEL).first.inner_text())
 
+    def get_container_percent(self) -> int:
+        """
+        Достаём процент из style:
+        style="--3ef01c3c: linear-gradient(to right, var(--color-green-range) 25%, ...)"
+        """
+        style = self.page.locator(FinancePageLocators.FIRST_PAYMENT_CONTAINER).get_attribute("style")
+        percent = int(style.split("var(--color-green-range)")[1].split("%")[0].strip())
+        return percent
+
+    def move_slider(self, value: int):
+        """Передвигаем ползунок на нужное значение."""
+        self.page.locator(FinancePageLocators.FIRST_PAYMENT_LABEL).fill(str(value))
